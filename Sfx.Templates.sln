@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sfx.Templates", "src\Sfx.Templates\Sfx.Templates.csproj", "{5053A5A8-102C-437F-A435-23C5FD372545}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "src\Tests\Tests.csproj", "{E10904A5-B8FA-41B8-8445-3365C7BC93B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5053A5A8-102C-437F-A435-23C5FD372545}.Debug|x86.ActiveCfg = Debug|x86
+		{5053A5A8-102C-437F-A435-23C5FD372545}.Debug|x86.Build.0 = Debug|x86
+		{5053A5A8-102C-437F-A435-23C5FD372545}.Release|x86.ActiveCfg = Release|x86
+		{5053A5A8-102C-437F-A435-23C5FD372545}.Release|x86.Build.0 = Release|x86
+		{E10904A5-B8FA-41B8-8445-3365C7BC93B6}.Debug|x86.ActiveCfg = Debug|x86
+		{E10904A5-B8FA-41B8-8445-3365C7BC93B6}.Debug|x86.Build.0 = Debug|x86
+		{E10904A5-B8FA-41B8-8445-3365C7BC93B6}.Release|x86.ActiveCfg = Release|x86
+		{E10904A5-B8FA-41B8-8445-3365C7BC93B6}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = src\Tests\Tests.csproj
+	EndGlobalSection
+EndGlobal
