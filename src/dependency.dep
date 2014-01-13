@@ -1,0 +1,11 @@
+# Dependency configuration
+# ----------------------------------------
+{	
+	items: 
+	[
+		{ source: '../../../Sfx/Sfx.Templates/readme.md', dest: '../', addToProject: false },
+		{ source: '../../../Sfx/Sfx.Templates/src/Sfx.Templates', dest: 'Sfx.Templates', addToProject: false },
+		{ source: '../../../Sfx/Sfx.Templates/src/Tests', dest: 'Tests', addToProject: false },
+		{ source: '../../../Sfx/Sfx.Templates/src/Tests/Dependencies', dest: 'Tests/Dependencies', extensions: ['*.dll'], addToProject: false }
+	]
+}
