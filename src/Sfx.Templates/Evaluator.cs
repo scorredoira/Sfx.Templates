@@ -73,7 +73,7 @@ namespace Sfx.Templates
 				else if(last.ParameterType == typeof(string[]))
 				{
 					convertedValues[lastIndex] = templateArguments.Skip(lastIndex).Select(
-						t => ConvertToString(model,t)).ToArray();
+						t => ConvertToString(context,t)).ToArray();
 				}	
 			}
 
@@ -88,7 +88,7 @@ namespace Sfx.Templates
 				var argument = templateArguments[i];
 
 				// si empieza por . es que es un valor del modelo.
-				var value = argument[0] == '.' ? Template.GetValue(model, argument) : argument;
+				var value = argument[0] == '.' ? Template.GetValue(context.RenderModel, argument) : argument;
 
 				try
 				{
@@ -111,9 +111,9 @@ namespace Sfx.Templates
 			return convertedValues;
 		}
 
-		static string ConvertToString(RenderModel model, string key)
+		static string ConvertToString(RenderContext context, string key)
 		{
-			var value = key[0] == '.' ? Template.GetValue(model, key) : key;
+			var value = key[0] == '.' ? Template.GetValue(context.RenderModel, key) : key;
 			return ConvertToString(value);
 		}
 

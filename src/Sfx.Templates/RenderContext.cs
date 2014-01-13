@@ -35,6 +35,7 @@ namespace Sfx.Templates
 			}
 		}
 
+		public Func<string, object, RenderContext, bool> RenderValue { get; set; }
 		public TextWriter Writer { get; set; }
 		public CultureInfo Culture { get; set; }
 

@@ -21,6 +21,13 @@ namespace Sfx.Templates
 
 		public static bool Debug { get; set; }
 
+
+		public Func<string, object, RenderContext, bool> RenderValue
+		{
+			get{ return this.RenderContext.RenderValue; }
+			set { this.RenderContext.RenderValue = value; }
+		}
+
 		public CultureInfo Culture 
 		{
 			get { return this.RenderContext.Culture; }
@@ -54,7 +61,7 @@ namespace Sfx.Templates
 
 		public static Template ParseFile(string file)
 		{
-			return Parser.Parse(File.ReadAllText(file));
+			return Parser.ParseFile(file);
 		}
 
 		public static Template Parse (string text)
@@ -68,6 +75,7 @@ namespace Sfx.Templates
 		public Template ParseInclude (string name, string text)
 		{
 			var include = Parser.Parse(text);
+			include.Path = name;
 			this.RenderContext.Templates[name] = include;
 			return include;
 		}
@@ -125,19 +133,33 @@ namespace Sfx.Templates
 
 		public void Render(RenderContext context)
 		{
-			if(this.BaseTemplate != null)
+			try
 			{
-				this.ExtendFromBaseTemplate(context);
-			}
-			else
-			{
-				foreach(var item in this.Items)
+				if(this.BaseTemplate != null)
 				{
-					item.Render(context);
+					this.ExtendFromBaseTemplate(context);
+				}
+				else
+				{
+					foreach(var item in this.Items)
+					{
+						item.Render(context);
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				if(this.Path != null)
+				{
+					throw new Exception(string.Format("Error at {0}: {1}", this.Path, ex.Message), ex);
+				}
+				else
+				{
+					throw;
 				}
 			}
 		}
-		
+
 		internal static object GetValue (RenderModel model, string key)
 		{
 			var value = GetModelValue (model.Model, key, model);
@@ -151,7 +173,7 @@ namespace Sfx.Templates
 
 			return value;
 		}
-			
+
 		static object GetModelValue (object model, string key, RenderModel renderModel)
 		{
 			if (key == ".")
@@ -213,7 +235,7 @@ namespace Sfx.Templates
 					if(char.IsDigit(modelIndex[0]))
 					{
 						var iIndex = int.Parse(modelIndex);
-												
+
 						var list = value as IList;
 						if(list != null)
 						{
@@ -245,6 +267,7 @@ namespace Sfx.Templates
 
 			return value;
 		}
+
 
 		/// <summary>
 		/// Obtiene el valor de la propiedad key en el objeto.

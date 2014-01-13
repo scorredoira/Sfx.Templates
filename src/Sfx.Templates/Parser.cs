@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 namespace Sfx.Templates
@@ -9,6 +10,13 @@ namespace Sfx.Templates
     static class Parser
     {
 		static readonly char[] argumentSeparators = new char[] {',', ' '};
+
+		public static Template ParseFile(string file)
+		{
+			var template = Parse(File.ReadAllText(file));
+			template.Path = file;
+			return template;
+		}
 
         public static Template Parse(string text)
         {

@@ -301,6 +301,40 @@ namespace Sfx.Templates.Tests
 			});
 			Assert.AreEqual("123", template.Render(new { a = "1", b = "2" }));
 		}
+
+		[Test]
+		public static void TestRenderValue()
+		{
+			var template = Template.Parse("{{ .name }}");
+
+			template.RenderValue = (a, b, c) => { 
+				c.Writer.Write("Bill"); 
+				return true; 
+			};
+
+			Assert.AreEqual("Bill", template.Render());
+		}
+
+		[Test]
+		public static void TestRenderValue2()
+		{
+			var template = Template.Parse("{{ .name }}");
+
+			template.RenderValue = (a, b, c) => { 
+				c.Writer.Write("Bill"); 
+				return true; 
+			};
+
+			Assert.AreEqual("Bill", template.Render(new { name = "John" }));
+		}
+
+		[Test]
+		public static void TestRenderValue3()
+		{
+			var template = Template.Parse("{{ .name }}");
+			template.RenderValue = (a, b, c) => false;
+			Assert.AreEqual("John", template.Render(new { name = "John" }));
+		}
     }
 }
 
