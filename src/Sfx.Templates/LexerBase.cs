@@ -18,6 +18,7 @@ namespace Sfx.Templates
         public string Input; // the string being scanned
         public int Start;
         public int Pos;
+		public int Line = 1;
         public List<Token> Tokens { get; set; } // En vez del channel acumula aqui los items escaneados.
 
         public LexerBase(string input)
@@ -76,6 +77,12 @@ namespace Sfx.Templates
 
             var c = this.Input[this.Pos];
             this.Pos++;
+
+			if (c == '\n')
+			{
+				this.Line++;
+			}
+
             return c;
         }
 
@@ -85,7 +92,12 @@ namespace Sfx.Templates
         }
 
         public void Backup()
-        {
+		{
+			if (this.Peek() == '\n')
+			{
+				this.Line--;
+			}
+
             this.Pos--;
         }
 
