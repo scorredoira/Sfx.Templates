@@ -56,9 +56,9 @@ Nesting:
 		{{end}}
 	{{end}}
 
-Condiciones
+Conditions
 ------------
-Aceptan como condición booleanos o funciones:
+Conditions can accept boolean values or functions:
 
 	{{ if .User.IsAdmin }} 
 	   you are admin
